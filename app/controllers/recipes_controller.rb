@@ -28,18 +28,26 @@ class RecipesController < ApplicationController
     end
   end
 
+  #Edit uses updated immediately
+  def edit
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def update
+    @recipe = Recipe.find(params[:id])
+    if @recipe.update(recipe_params)
+     flash[:success] = "Your recipe was updated succesfully"
+     redirect_to recipe_path(@recipe)
+     #needs to receive the object
+    else
+      render :edit
+    end
+  end
+
   private
 
     def recipe_params
       params.require(:recipe).permit(:name, :summary, :description)
     end
-
-  def edit
-
-  end
-
-  def update
-
-  end
 
 end
