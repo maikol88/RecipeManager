@@ -1,10 +1,11 @@
 <p>
-<h1>Create a new Recipe</h1>
+  <h1>Create a new Recipe</h1>
+  <hr>
 </p>
 
 <% if @recipe.errors.any? %>
     <div class="row">
-      <div class="alert alert-danger col-md-8 cold-md-offset-2">
+      <div class="alert alert-danger col-md-8 col-md-offset-2">
         <h5>Please correct the following errors:</h5>
         <ul>
           <% @recipe.errors.full_messages.each do |msg| %>
