@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   get '/home', to: 'pages#home'
 
-  resources :recipes
+  resources :recipes do
+    member do
+      post 'like'
+    end
+  end
   #this line creates all of below
   #get '/recipes', to: 'recipes#index'
   #get '/recipes/new', to: 'recipes#new', as: 'new_recipe'
@@ -15,5 +19,7 @@ Rails.application.routes.draw do
   #patch '/recipes/:id', to: 'recipes#update'
   #get 'recipes/:id', to: 'recipes#show', as: 'recipe'
   #delete '/recipes/:id', to: 'recipes#destroy'
+
+
 
 end
