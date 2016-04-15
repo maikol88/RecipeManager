@@ -23,3 +23,19 @@ Testing specs for recipes:
     - email must be present
     - email must be unique (since we will check for logins later)
     - email must be valid
+
+
+Chefs:
+What we have already:
+    - Chef model and validation
+    - chefs table with chefname and email
+
+What we need to do:
+    - Add passwords to chefs table so chefs can be authenticated and loggied in
+    - Use email as log in credentials, since email is unique
+    - Ability to register new chefs to use the app
+    - Ability to display chefs profile
+    - Ability to list chefs using app
+    - Ability for chefs to log in and out of the app
+    - Restrict actions to create edit and like to logged in chefs only
+    - Restricting edit of recipes by chefs who created the recipes

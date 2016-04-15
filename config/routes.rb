@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   #get 'recipes/:id', to: 'recipes#show', as: 'recipe'
   #delete '/recipes/:id', to: 'recipes#destroy'
 
+  resources :chefs, except: [:new]
+  get '/register', to: 'chefs#new'
 
 
 end

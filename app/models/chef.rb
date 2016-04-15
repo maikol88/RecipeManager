@@ -8,4 +8,6 @@ class Chef < ActiveRecord::Base
                                     uniqueness: {case_sensitive: false},
                                     format: { with: VALID_EMAIL_REGEX }
   #checks uniqueness is true and that is not case sensitive
+
+  has_secure_password
 end
