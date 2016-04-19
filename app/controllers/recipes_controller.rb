@@ -1,4 +1,8 @@
 class RecipesController < ApplicationController
+  before_action :set_recipe, only: [:edit, :update, :show, :like]
+  before_action :require_user, except: [:show, :index]
+  #we will require the user from the applicatio controller since we are going to use it in more places
+  before_action :require_same_user,only: [:edit, :update]
 
   def index
     #@recipes = Recipe.all.sort_by { |likes| likes.thumbs_up_total}.reverse
@@ -10,7 +14,7 @@ class RecipesController < ApplicationController
     #binding.pry to check parameters
     #I can type params on the terminal when on pry to see what parameters are being passed
     # We can see that we are looking for the id params
-    @recipe = Recipe.find(params[:id])
+    #@recipe = Recipe.find(params[:id])
   end
 
   def new
@@ -20,7 +24,7 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     #for now  we will hardcode a chef
-    @recipe.chef = Chef.find(1)
+    @recipe.chef = current_user
 
     if @recipe.save
       flash[:success] = 'Your recipe was created succesfully!'
@@ -29,26 +33,25 @@ class RecipesController < ApplicationController
       render :new
     end
   end
-
   #Edit uses updated immediately
   def edit
-    @recipe = Recipe.find(params[:id])
+
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
+    #@recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
      flash[:success] = "Your recipe was updated succesfully"
      redirect_to recipe_path(@recipe)
-     #needs to receive the object
+     #path needs to receive the object
     else
       render :edit
     end
   end
 
   def like
-    @recipe = Recipe.find(params[:id])
-    like = Like.create(like: params[:like], chef: Chef.first, recipe: @recipe)
+    #@recipe = Recipe.find(params[:id])
+    like = Like.create(like: params[:like], chef: current_user, recipe: @recipe)
     if like.valid?
       flash[:success] = "Your selection was successful"
       redirect_to :back
@@ -56,15 +59,24 @@ class RecipesController < ApplicationController
       flash[:danger] = "You can only like/dislike a recipe once"
       redirect_to :back
     end
-
     #redirect_to :back makes them stay where they were.
-
   end
 
   private
 
     def recipe_params
       params.require(:recipe).permit(:name, :summary, :description, :picture)
+    end
+
+    def set_recipe
+      @recipe = Recipe.find(params[:id])
+    end
+
+    def require_same_user
+      if current_user != @recipe.chef
+        flash[:danger] = "You can only edit your own recipes!"
+        redirect_to recipes_path
+      end
     end
 
 end
