@@ -13,7 +13,7 @@ class ChefsController < ApplicationController
   def create
     @chef = Chef.new(chef_params)
     if @chef.save
-      flash[:success] = "Your account has been created succesfully"
+      flash[:success] = "Your account has been created successfully"
       session[:chef_id] = @chef.id
       redirect_to recipes_path
     else
@@ -26,7 +26,7 @@ class ChefsController < ApplicationController
 
   def update
     if @chef.update(chef_params)
-      flash[:success] = "Your profile has been updated succesfully"
+      flash[:success] = "Your profile has been updated successfully"
       redirect_to chef_path(@chef)
     else
       render 'edit'

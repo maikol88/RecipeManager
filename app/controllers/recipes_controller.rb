@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:edit, :update, :show, :like]
-  before_action :require_user, except: [:show, :index]
-  #we will require the user from the applicatio controller since we are going to use it in more places
+  before_action :require_user, except: [:show, :index, :like]
+  #we will require the user from the application controller since we are going to use it in more places
+  before_action :require_user_like, only: [:like]
   before_action :require_same_user,only: [:edit, :update]
 
   def index
@@ -27,7 +28,7 @@ class RecipesController < ApplicationController
     @recipe.chef = current_user
 
     if @recipe.save
-      flash[:success] = 'Your recipe was created succesfully!'
+      flash[:success] = 'Your recipe was created successfully!'
       redirect_to recipes_path
     else
       render :new
@@ -41,7 +42,7 @@ class RecipesController < ApplicationController
   def update
     #@recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
-     flash[:success] = "Your recipe was updated succesfully"
+     flash[:success] = "Your recipe was updated successfully"
      redirect_to recipe_path(@recipe)
      #path needs to receive the object
     else
@@ -65,7 +66,7 @@ class RecipesController < ApplicationController
   private
 
     def recipe_params
-      params.require(:recipe).permit(:name, :summary, :description, :picture)
+      params.require(:recipe).permit(:name, :summary, :description, :picture, style_ids: [], ingredient_ids: [])
     end
 
     def set_recipe
@@ -76,6 +77,13 @@ class RecipesController < ApplicationController
       if current_user != @recipe.chef
         flash[:danger] = "You can only edit your own recipes!"
         redirect_to recipes_path
+      end
+    end
+
+    def require_user_like
+      if !logged_in?
+        flash[:danger] = "You must be logged in to perform that action"
+        redirect_to :back
       end
     end
 
