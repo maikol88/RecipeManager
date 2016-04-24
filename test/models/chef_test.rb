@@ -6,7 +6,7 @@ class ChefTest < ActiveSupport::TestCase
     @chef = Chef.new(chefname: "john", email: "john@example.com")
   end
 
-  test "chef shoud be valid" do
+  test "chef should be valid" do
     assert @chef.valid?
   end
 
@@ -15,12 +15,12 @@ class ChefTest < ActiveSupport::TestCase
     assert_not @chef.valid?
   end
 
-  test "chefname should not be long" do
-    @chef.chefname = "a"*51
+  test "chefname should not be too long" do
+    @chef.chefname = "a" * 41
     assert_not @chef.valid?
   end
 
-  test "chefname should not be short" do
+  test "chefname should not be too short" do
     @chef.chefname = "aa"
     assert_not @chef.valid?
   end
@@ -31,7 +31,7 @@ class ChefTest < ActiveSupport::TestCase
   end
 
   test "email length should be within bounds" do
-    @chef.email = "a"*81 + "@example.com"
+    @chef.email = "a" * 101 + "@example.com"
     assert_not @chef.valid?
   end
 
@@ -42,17 +42,16 @@ class ChefTest < ActiveSupport::TestCase
     assert_not dup_chef.valid?
   end
 
-  test "email validation should ACCEPT valid addresses" do
+  test "email validation should accept valid addresses" do
     valid_addresses = %w[user@eee.com R_TDD-DS@eee.hello.org user@example.com first.last@eem.au laura+joe@monk.cm]
     valid_addresses.each do |va|
       @chef.email = va
       assert @chef.valid?, '#{va.inspect} should be valid'
     end
-    #since we want it to be valid and accept we use assert
   end
 
-  test "email validation should REJECT invalid addresses" do
-    invalid_addresses = %w[user@example,com user_at_eee.org user.bane@example, eee@i_am.com foo@ee+aar.com]
+  test "email validation should reject invalid addresses" do
+    invalid_addresses = %w[user@example,com user_at_eee.org user.name@example. eee@i_am_.com foo@ee+aar.com]
     invalid_addresses.each do |ia|
       @chef.email = ia
       assert_not @chef.valid?, '#{ia.inspect} should be invalid'
