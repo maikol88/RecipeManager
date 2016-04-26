@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
   #we will require the user from the application controller since we are going to use it in more places
   before_action :require_user_like, only: [:like]
   before_action :require_same_user,only: [:edit, :update]
+  before_action :admin_user, only: :destroy
 
   def index
     #@recipes = Recipe.all.sort_by { |likes| likes.thumbs_up_total}.reverse
@@ -63,6 +64,12 @@ class RecipesController < ApplicationController
     #redirect_to :back makes them stay where they were.
   end
 
+  def destroy
+    Recipe.find(params[:id]).destroy
+    flash[:success] = "Recipe Deleted"
+    redirect_to recipes_path
+  end
+
   private
 
     def recipe_params
@@ -74,7 +81,7 @@ class RecipesController < ApplicationController
     end
 
     def require_same_user
-      if current_user != @recipe.chef
+      if current_user != @recipe.chef and !current_user.admin?
         flash[:danger] = "You can only edit your own recipes!"
         redirect_to recipes_path
       end
@@ -85,6 +92,10 @@ class RecipesController < ApplicationController
         flash[:danger] = "You must be logged in to perform that action"
         redirect_to :back
       end
+    end
+
+    def admin_user
+      redirect_to recipes_path unless current_user.admin?
     end
 
 end
