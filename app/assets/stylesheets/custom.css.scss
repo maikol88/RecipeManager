@@ -1,14 +1,33 @@
-$navbar-default-bg: #312312;
+$navbar-default-bg: #ffffff;
 $light-orange: #ff8c00;
 $navbar-default-color: $light-orange;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+.button-color-variation{
+  background-color: #F27D9A;
+  color: white;
+}
+
+.nav-nav-nav{
+  border-bottom: 5px solid #F27D9A;
+}
+.recipe-button{
+  background-color: #F27D9A;
+  color: white;
+}
+
+.recipe-button:hover {
+  background-color: #F27D9A;
+  color: white;
+}
+
 #logo {
   margin-top: 10px;
   margin-bottom: 10px;
-  float: left;
+  float: right;
   margin-right: 10px;
   font-size: 2em;
   color: #fff;
@@ -37,6 +56,12 @@ body {
   padding-left: 25px;
   float: left;
   margin-top: 20px;
+}
+
+.nav_ul_logo {
+  padding-right: 10px;
+  float: right;
+  margin-top: 7px;
 }
 
 .center {
@@ -110,4 +135,9 @@ span.picture {
 
 .show_recipe {
   margin: 10px 10px 10px 10px;
+}
+
+.centered-object{
+  margin: auto;
+  width: 60%;
 }
