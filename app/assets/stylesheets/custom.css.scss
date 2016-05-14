@@ -5,7 +5,14 @@ $navbar-default-color: $light-orange;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.button-profile{
+  background-color: #A65DA7;
+  color: white;
+}
 
+.text-color-purple{
+  color: #A65DA7;
+}
 .button-color-variation{
   background-color: #F27D9A;
   color: white;
@@ -140,4 +147,17 @@ span.picture {
 .centered-object{
   margin: auto;
   width: 60%;
+}
+
+//links
+ul.nav li a, ul.nav li a:visited {
+  color: #A65DA7 !important;
+}
+
+ul.nav li a:hover, ul.nav li a:active {
+  color: #804681 !important;
+}
+
+ul.nav li.active a {
+  color: #A65DA7 !important;
 }

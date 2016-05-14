@@ -23,11 +23,14 @@
             <%= cbi.label(class: "checkbox-inline input_checkbox") {cbi.check_box(class:"checkbox") + cbi.text}%>
         <% end %>
         <br><br>
+
+        <strong>Attach image:</strong>
         <span class="picture">
+
           <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
         </span>
 
-        <%= f.submit(@recipe.new_record? ? 'Create Recipe' : 'Edit Recipe', class: "btn btn-success" )%>
+        <%= f.submit(@recipe.new_record? ? 'Create Recipe' : 'Edit Recipe', class: "btn button-profile" )%>
     <% end %>
   </div>
 </div>
