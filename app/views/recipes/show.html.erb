@@ -23,8 +23,17 @@
 
       <% if @recipe.styles.any? %>
         <p>Cuisine: <%= render @recipe.styles %></p>
-        <hr>
       <% end %>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-1"><span class="glyphicon glyphicon-user glyphicon-size" aria-hidden="true" aria-label="Left Align" ></span></div>
+      <div class="col-md-1 time-serving-space"><p class="time-serving-space">Serves:</p><h4 class="text-color-purple time-serving-space center"><strong><%= @recipe.servings %></strong></h4></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-1"><span class="glyphicon glyphicon-time glyphicon-size" aria-hidden="true" aria-label="Right Align"></span></div>
+      <div class="col-md-2 time-serving-space"><p class="time-serving-space">Cook Time:</p><h4 class="text-color-purple time-serving-space center" style="padding-right: 20px"><strong><%= @recipe.preparation_time%></strong></h4></div>
+    </div>
+    <hr>
 
       <% if @recipe.ingredients.any? %>
         <div class="well">
