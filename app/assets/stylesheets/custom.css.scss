@@ -2,9 +2,13 @@ $navbar-default-bg: #ffffff;
 $light-orange: #ff8c00;
 $navbar-default-color: $light-orange;
 
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+html, body{
+  background: url('plaid-small.jpg') repeat;
+}
 .button-profile{
   background-color: #A65DA7;
   color: white;
