@@ -1,1 +1,8 @@
+Recipe application
+
+A guest can browse recipes.
+A user can created edit and like recipes.
+A user image is linked to gravatar.
+Images are hosted in amazon server.
+
 Visit: https://myrecipeapprails.herokuapp.com/
