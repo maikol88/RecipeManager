@@ -4,10 +4,10 @@
       <%= image_tag("SmallLogo.png", size: "65x65", alt: "Cook logo") %>
     </div>
     <%= link_to "Mom's Recipes", root_path, class: "btn btn-lg recipe-button", id: "logo" %>
-    <% if not (current_page?(root_url)) and not (current_page?('/login')) and not (current_page?('/register')) and not (current_page?('/recipes')) and not (current_page?('/chefs')) %>
+    <% if not (current_page?(root_url)) and not (current_page?('/login')) and not (current_page?('/register')) and not (current_page?('/chefs')) %>
         <ul class="nav_ul_item list-unstyled">
           <li class="dropdown">
-            <%= link_to '#', class: "btn btn-default recipe-button dropdwon-toggle", "data-toggle" => "dropdown" do %>
+            <%= link_to '#', class: "btn recipe-button dropdown-toggle", "data-toggle" => "dropdown" do %>
                 Cuisine <b class="caret"></b>
             <% end %>
             <ul class="dropdown-menu">
@@ -26,10 +26,10 @@
           </li>
         </ul>
     <% end %>
-    <% if logged_in? and not (current_page?(root_url)) and not (current_page?('/login')) and not (current_page?('/register')) and not (current_page?('/recipes')) and not (current_page?('/chefs')) %>
+    <% if logged_in? and not (current_page?(root_url)) and not (current_page?('/login')) and not (current_page?('/register')) and not (current_page?('/chefs')) %>
         <ul class="nav_ul_item list-unstyled">
           <li class="dropdown">
-            <%= link_to '#', class: "btn btn-default recipe-button dropdwon-toggle", "data-toggle" => "dropdown" do %>
+            <%= link_to '#', class: "btn recipe-button dropdown-toggle", "data-toggle" => "dropdown" do %>
                 Ingredients <b class="caret"></b>
             <% end %>
             <ul class="dropdown-menu">

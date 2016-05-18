@@ -22,6 +22,11 @@ html, body {
   color: white;
 }
 
+.button-profile:hover {
+  background-color: #804681;
+  color: white;
+}
+
 .text-color-purple {
   color: #A65DA7;
 }
@@ -41,7 +46,17 @@ html, body {
 }
 
 .recipe-button:hover {
-  background-color: #F27D9A;
+  background-color: #D26D87;
+  color: white;
+}
+
+.recipe-button:active {
+  background-color: #D26D87;
+  color: white;
+}
+
+.recipe-button:focus {
+  background-color: #D26D87;
   color: white;
 }
 
