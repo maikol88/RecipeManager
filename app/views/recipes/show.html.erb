@@ -20,7 +20,7 @@
     <div class="row">
       <div class="col-md-4">
         <%= link_to gravatar_for(@recipe.chef, size: 50), chef_path(@recipe.chef) %>
-        <span class="text-color-purple spacing-row-text left-spacing-row"><strong>By: <%= @recipe.chef.chefname %><strong></span>
+        <span class="text-color-purple spacing-row-text left-spacing-row"><strong>By: <%= @recipe.chef.chefname %></strong></span>
       </div>
       <div class="col-md-4 center">
         <% if @recipe.styles.any? %>
