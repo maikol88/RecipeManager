@@ -1,59 +1,63 @@
 <%= render 'shared/page_title', title: @recipe.name %>
 
 <div class="row">
-  <div class="col-md-4 pull-right center">
-    <%= link_to gravatar_for(@recipe.chef, size: 200), chef_path(@recipe.chef) %>
-    <p>
-    <h5>Brought to you by: <%= @recipe.chef.chefname %></h5>
-    </p>
-  </div>
-  <div class="col-md-8">
+  <div class="col-md-12">
     <% if logged_in? and @recipe.chef == current_user || current_user.admin? %>
-      <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class:"btn button-profile pull-right" %>
+        <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class: "btn button-profile pull-right" %>
     <% end %>
 
     <% if logged_in? and current_user.admin? %>
-      <%= link_to "Delete Recipe", @recipe, class: "btn btn-danger pull-right", style:"margin-right: 10px", method: :delete , data: { confirm: "Are you sure?" } %>
+        <%= link_to "Delete Recipe", @recipe, class: "btn btn-danger pull-right", style: "margin-right: 10px", method: :delete, data: {confirm: "Are you sure?"} %>
     <% end %>
 
-    <h3><%= @recipe.summary %></h3>
-    <div class="show_recipe">
+    <h3 class="center"><%= @recipe.summary %></h3>
+
+    <div class="show_recipe center">
       <%= image_tag(@recipe.picture.url, class: "gravatar") if @recipe.picture? %>
     </div>
 
-      <% if @recipe.styles.any? %>
-        <p>Cuisine: <%= render @recipe.styles %></p>
-      <% end %>
-
     <hr>
     <div class="row">
-      <div class="col-md-1"><span class="glyphicon glyphicon-user glyphicon-size" aria-hidden="true" aria-label="Left Align" ></span></div>
-      <div class="col-md-1 time-serving-space"><p class="time-serving-space">Serves:</p><h4 class="text-color-purple time-serving-space center"><strong><%= @recipe.servings %></strong></h4></div>
-      <div class="col-md-1"></div>
-      <div class="col-md-1"><span class="glyphicon glyphicon-time glyphicon-size" aria-hidden="true" aria-label="Right Align"></span></div>
-      <div class="col-md-2 time-serving-space"><p class="time-serving-space">Cook Time:</p><h4 class="text-color-purple time-serving-space center" style="padding-right: 20px"><strong><%= @recipe.preparation_time%></strong></h4></div>
+      <div class="col-md-4">
+        <%= link_to gravatar_for(@recipe.chef, size: 50), chef_path(@recipe.chef) %>
+        <span class="text-color-purple spacing-row-text left-spacing-row"><strong>By: <%= @recipe.chef.chefname %><strong></span>
+      </div>
+      <div class="col-md-4 center">
+        <% if @recipe.styles.any? %>
+            <span class="text-color-purple " style="height: 40px; line-height: 40px;"><strong>Cuisine: <%= render @recipe.styles %></strong></span>
+        <% end %>
+      </div>
+
+      <div class="col-md-4">
+        <div class="pull-right">
+          <span class="glyphicon glyphicon-user glyphicon-size right-spacing-row" aria-hidden="true" aria-label="Left Align" ></span>
+          <span class="text-color-purple right-spacing-row spacing-row-text"><strong><%= @recipe.servings %> servings</strong></span>
+          <span class="glyphicon glyphicon-time glyphicon-size right-spacing-row" aria-hidden="true" aria-label="Right Align"></span>
+          <span class="text-color-purple right-spacing-row spacing-row-text"><strong><%= @recipe.preparation_time %> mins</strong></span>
+        </div>
+      </div>
     </div>
     <hr>
 
-      <% if @recipe.ingredients.any? %>
+    <% if @recipe.ingredients.any? %>
         <div class="well">
-          <h3 class="text-color-purple" style="margin: 0px" >Ingredients:</h3>
+          <h3 class="text-color-purple" style="margin:0;">Ingredients:</h3>
           <br>
-            <ul class="list-unstyled">
-              <% @recipe.ingredients.each do |ingrediente|%>
+          <ul class="list-unstyled">
+            <% @recipe.ingredients.each do |ingrediente| %>
                 <li><%= render ingrediente %></li>
-              <% end %>
-            </ul>
+            <% end %>
+          </ul>
         </div>
-      <% end %>
+    <% end %>
 
     <div class="well">
-      <h3 class="text-color-purple" style="margin: 0px" >Directions:</h3>
+      <h3 class="text-color-purple" style="margin:0;">Directions:</h3>
       <br>
       <%= simple_format(@recipe.description) %>
       <div class="pull-right">
         <%= link_to like_recipe_path(@recipe, like: true), method: :post do %>
-          <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= @recipe.thumbs_up_total %>
+            <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= @recipe.thumbs_up_total %>
         <% end %>
         &nbsp&nbsp&nbsp&nbsp
         <%= link_to like_recipe_path(@recipe, like: false), method: :post do %>
